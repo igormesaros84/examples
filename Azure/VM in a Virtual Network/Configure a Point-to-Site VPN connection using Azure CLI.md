@@ -154,4 +154,7 @@ to download VPN client, type following:
 az network vnet-gateway vpn-client generate -g $rg -n vnet-ghost-gw --processor-architecture Amd64
 ```
 
-The result will be a url which allows you to download the vpn client
+The result will be a url which allows you to download the vpn client. Once the vpn client is installed it can be found under **Settings > VPN** \
+![settings-vpn](resources/vpn-connection-settings.jpg)
+
+Pressing connect will connect us to the VPN.

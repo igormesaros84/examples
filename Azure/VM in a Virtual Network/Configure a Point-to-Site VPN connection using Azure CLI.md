@@ -1,4 +1,16 @@
-# Configure a Point-to-Site VPN connection using Azure certificate authentication: Azure portal
+Table of content
+- [Configure a Point-to-Site VPN connection using Azure certificate authentication: Azure CLI](#configure-a-point-to-site-vpn-connection-using-azure-certificate-authentication-azure-cli)
+  - [Create VNet](#create-vnet)
+  - [Create VPN Gateway](#create-vpn-gateway)
+  - [Generate Certificates](#generate-certificates)
+    - [Generate a root certificate](#generate-a-root-certificate)
+    - [Generate a client certificate](#generate-a-client-certificate)
+    - [Export the root certificate public key (.cer)](#export-the-root-certificate-public-key-cer)
+    - [Export the client certificate](#export-the-client-certificate)
+  - [Add the VPN client address pool](#add-the-vpn-client-address-pool)
+  - [Upload the root certificate public key information](#upload-the-root-certificate-public-key-information)
+  - [Configure the VPN client:](#configure-the-vpn-client)
+# Configure a Point-to-Site VPN connection using Azure certificate authentication: Azure CLI
 
 Point-to-site native Azure certificate authentication connections use the following items, which you configure in this exercise:
 

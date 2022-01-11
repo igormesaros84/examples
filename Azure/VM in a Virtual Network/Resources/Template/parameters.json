@@ -1,0 +1,186 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "uksouth"
+        },
+        "networkInterfaceName": {
+            "value": "vm-ghost-deploy594"
+        },
+        "subnetName": {
+            "value": "main-subnet"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/90bed0bf-4fd9-4685-870f-8ba85bc0d94e/resourceGroups/rg-ghost-vm/providers/Microsoft.Network/virtualNetworks/vnet-ghost"
+        },
+        "virtualMachineName": {
+            "value": "vm-ghost-deploy"
+        },
+        "virtualMachineComputerName": {
+            "value": "vm-ghost-deploy"
+        },
+        "virtualMachineRG": {
+            "value": "rg-ghost-vm"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "ReadOnly",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "vm-ghost-deploy_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                },
+                {
+                    "lun": 1,
+                    "createOption": "attach",
+                    "caching": "None",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "vm-ghost-deploy_DataDisk_1",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "vm-ghost-deploy_DataDisk_0",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                },
+                {
+                    "name": "vm-ghost-deploy_DataDisk_1",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2s"
+        },
+        "adminUsername": {
+            "value": "ghostadmin"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "sqlVirtualMachineLocation": {
+            "value": "uksouth"
+        },
+        "sqlVirtualMachineName": {
+            "value": "vm-ghost-deploy"
+        },
+        "sqlConnectivityType": {
+            "value": "Private"
+        },
+        "sqlPortNumber": {
+            "value": 1433
+        },
+        "sqlStorageDisksCount": {
+            "value": 1
+        },
+        "sqlStorageWorkloadType": {
+            "value": "OLTP"
+        },
+        "sqlStorageDisksConfigurationType": {
+            "value": "NEW"
+        },
+        "sqlStorageStartingDeviceId": {
+            "value": 2
+        },
+        "sqlStorageDeploymentToken": {
+            "value": 6130
+        },
+        "sqlAutopatchingDayOfWeek": {
+            "value": "Sunday"
+        },
+        "sqlAutopatchingStartHour": {
+            "value": "2"
+        },
+        "sqlAutopatchingWindowDuration": {
+            "value": "60"
+        },
+        "dataPath": {
+            "value": "F:\\data"
+        },
+        "dataDisksLUNs": {
+            "value": [
+                0
+            ]
+        },
+        "logPath": {
+            "value": "G:\\log"
+        },
+        "logDisksLUNs": {
+            "value": [
+                1
+            ]
+        },
+        "tempDbPath": {
+            "value": "D:\\tempDb"
+        },
+        "dataFileCount": {
+            "value": 2
+        },
+        "dataFileSize": {
+            "value": 8
+        },
+        "dataGrowth": {
+            "value": 64
+        },
+        "logFileSize": {
+            "value": 8
+        },
+        "logGrowth": {
+            "value": 64
+        },
+        "SQLSystemDbOnDataDisk": {
+            "value": false
+        },
+        "rServicesEnabled": {
+            "value": "false"
+        },
+        "maxdop": {
+            "value": 0
+        },
+        "isOptimizeForAdHocWorkloadsEnabled": {
+            "value": false
+        },
+        "collation": {
+            "value": "SQL_Latin1_General_CP1_CI_AS"
+        },
+        "minServerMemoryMB": {
+            "value": 0
+        },
+        "maxServerMemoryMB": {
+            "value": 2147483647
+        }
+    }
+}

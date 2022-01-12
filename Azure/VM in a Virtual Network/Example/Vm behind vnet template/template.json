@@ -1,0 +1,348 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_azurevm_1_name": {
+            "defaultValue": "azurevm-1",
+            "type": "String"
+        },
+        "connections_office365_name": {
+            "defaultValue": "office365",
+            "type": "String"
+        },
+        "virtualNetworks_vnet_ghost_name": {
+            "defaultValue": "vnet-ghost",
+            "type": "String"
+        },
+        "virtualMachines_vm_ghost_im_name": {
+            "defaultValue": "vm-ghost-im",
+            "type": "String"
+        },
+        "publicIPAddresses_ip_ghost_vnet_name": {
+            "defaultValue": "ip-ghost-vnet",
+            "type": "String"
+        },
+        "networkInterfaces_vm_ghost_im888_name": {
+            "defaultValue": "vm-ghost-im888",
+            "type": "String"
+        },
+        "virtualNetworkGateways_vnet_ghost_gw_name": {
+            "defaultValue": "vnet-ghost-gw",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('publicIPAddresses_ip_ghost_vnet_name')]",
+            "location": "uksouth",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "properties": {
+                "ipAddress": "13.87.92.44",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('virtualNetworks_vnet_ghost_name')]",
+            "location": "uksouth",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "22.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": []
+                },
+                "subnets": [
+                    {
+                        "name": "GatewaySubnet",
+                        "properties": {
+                            "addressPrefix": "22.0.1.0/24",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    },
+                    {
+                        "name": "main-subnet",
+                        "properties": {
+                            "addressPrefix": "22.0.2.0/24",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_azurevm_1_name')]",
+            "location": "uksouth",
+            "kind": "V1",
+            "properties": {
+                "displayName": "Igor.Mesaros@bighand.com",
+                "statuses": [
+                    {
+                        "status": "Connected"
+                    }
+                ],
+                "customParameterValues": {},
+                "nonSecretParameterValues": {
+                    "token:TenantId": "8bdec57d-4fc5-4f38-b9a1-e7072519140d",
+                    "token:grantType": "code"
+                },
+                "createdTime": "2022-01-11T11:29:05.8786787Z",
+                "changedTime": "2022-01-12T22:11:41.1160813Z",
+                "api": {
+                    "name": "azurevm",
+                    "displayName": "Azure VM",
+                    "description": "Azure VM connector allows you to manage virtual machines.",
+                    "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1515/1.0.1515.2556/azurevm/icon.png",
+                    "brandColor": "#FFFFFF",
+                    "id": "/subscriptions/90bed0bf-4fd9-4685-870f-8ba85bc0d94e/providers/Microsoft.Web/locations/uksouth/managedApis/azurevm",
+                    "type": "Microsoft.Web/locations/managedApis"
+                },
+                "testLinks": []
+            }
+        },
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_office365_name')]",
+            "location": "uksouth",
+            "kind": "V1",
+            "properties": {
+                "displayName": "Igor.Mesaros@bighand.com",
+                "statuses": [
+                    {
+                        "status": "Connected"
+                    }
+                ],
+                "customParameterValues": {},
+                "nonSecretParameterValues": {},
+                "createdTime": "2022-01-11T11:27:05.9630794Z",
+                "changedTime": "2022-01-12T22:11:30.8911923Z",
+                "api": {
+                    "name": "[parameters('connections_office365_name')]",
+                    "displayName": "Office 365 Outlook",
+                    "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
+                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1538/1.0.1538.2621/', parameters('connections_office365_name'), '/icon.png')]",
+                    "brandColor": "#0078D4",
+                    "id": "[concat('/subscriptions/90bed0bf-4fd9-4685-870f-8ba85bc0d94e/providers/Microsoft.Web/locations/uksouth/managedApis/', parameters('connections_office365_name'))]",
+                    "type": "Microsoft.Web/locations/managedApis"
+                },
+                "testLinks": [
+                    {
+                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/90bed0bf-4fd9-4685-870f-8ba85bc0d94e/resourceGroups/rg-ghost-vm/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "method": "get"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2021-07-01",
+            "name": "[parameters('virtualMachines_vm_ghost_im_name')]",
+            "location": "uksouth",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_vm_ghost_im888_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-g2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_vm_ghost_im_name'), '_disk1_9dcbdbe23e5b468e94471f9ea6a3ae1c')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_vm_ghost_im_name'), '_disk1_9dcbdbe23e5b468e94471f9ea6a3ae1c'))]"
+                        },
+                        "deleteOption": "Detach"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_vm_ghost_im_name')]",
+                    "adminUsername": "ghostadmin",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_vm_ghost_im888_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_vm_ghost_im888_name')]",
+            "location": "uksouth",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_ghost_name'), 'main-subnet')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "22.0.2.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_ghost_name'), 'main-subnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_vnet_ghost_name'), '/GatewaySubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_vnet_ghost_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "22.0.1.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_vnet_ghost_name'), '/main-subnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_vnet_ghost_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "22.0.2.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworkGateways",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('virtualNetworkGateways_vnet_ghost_gw_name')]",
+            "location": "uksouth",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip_ghost_vnet_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_ghost_name'), 'GatewaySubnet')]"
+            ],
+            "properties": {
+                "enablePrivateIpAddress": false,
+                "ipConfigurations": [
+                    {
+                        "name": "vnetGatewayConfig0",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip_ghost_vnet_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_ghost_name'), 'GatewaySubnet')]"
+                            }
+                        }
+                    }
+                ],
+                "sku": {
+                    "name": "Basic",
+                    "tier": "Basic"
+                },
+                "gatewayType": "Vpn",
+                "vpnType": "RouteBased",
+                "enableBgp": false,
+                "activeActive": false,
+                "vpnClientConfiguration": {
+                    "vpnClientAddressPool": {
+                        "addressPrefixes": [
+                            "22.1.0.0/24"
+                        ]
+                    },
+                    "vpnClientProtocols": [
+                        "SSTP"
+                    ],
+                    "vpnAuthenticationTypes": [
+                        "Certificate"
+                    ],
+                    "vpnClientRootCertificates": [
+                        {
+                            "name": "P2SRootCert",
+                            "properties": {
+                                "publicCertData": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlDNXpDQ0FjK2dBd0lCQWdJUUdYYWZJMTNmdVp0TXJDeHBPdXU2UXpBTkJna3Foa2lHOXcwQkFRc0ZBREFXDQpNUlF3RWdZRFZRUUREQXRRTWxOU2IyOTBRMlZ5ZERBZUZ3MHlNakF4TURneE5qUXhNalphRncweU16QXhNRGd4DQpOekF4TWpaYU1CWXhGREFTQmdOVkJBTU1DMUF5VTFKdmIzUkRaWEowTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGDQpBQU9DQVE4QU1JSUJDZ0tDQVFFQXlNUk95NlZZVEYzQU5Ca2xFd0dteXAwVUdOV0R1bGtxVTFyZWNSQzJkL0ZaDQpHTlNJcU9PYUljSThOaFlUSUw0dEVrRXB1MHpNc2paVnlFZjBySC93M3NqMCt2Ujd2M3BzcFNOK09RdGFjWDBHDQpyZUtIK012aVRyUnArQTk4Y0d5b0hUMklRODFrS3NBK2tCMkc4N0pyc3l2aENpM1pRY0VZdnFiYytVT1RyMDk1DQo1cFUwWkkvRUFmZWFXa1NRd3NDQzhSOWh3SGhZeFViV0NMMFVPUzZEci9lWFZ0RzNHejBhc3hKUTYvWVQyUmVJDQoyQjZzWHN3TnJiYWJIMXFLRjlHeTFsT1JmMEFYVUQ5OTJQZkU3SjFLRzJoN3hiRS9rMVZVc0NVdFc0bkdrV3pQDQpUaTN0M0IvbDV2MlMyNU1qTy93K3l1V1dJTzJJT0RXTUxjc1kyUTRIa1FJREFRQUJvekV3THpBT0JnTlZIUThCDQpBZjhFQkFNQ0FnUXdIUVlEVlIwT0JCWUVGSlduYVpJTjFrejEyOTVaUFRPcklmTG56TmVJTUEwR0NTcUdTSWIzDQpEUUVCQ3dVQUE0SUJBUUFvU1NXQTFrWnQwc1I5MWhQMldBdDdBaUpmR2MwRW50S3VXZGVlRno5YWlaenVqczB0DQpBa1lOYmM2WUdmRkxRZ1pFRnluZzlSbWVaVmdKTXNjRlZEcWpibW0xUEZLM1JMeEN1cWR5MHpocC8veUdsWTdCDQpGNWE4MjYrbVA4OUN6My9tTkJNSERqaHJzN1JBUHF4enlodzRUVlloeTc3T2xsRHozYlR5aElCejhJYjRFSCtFDQp1d3BnQ3BiZlBHZFovV0VmRnJpWTNEL29ZdXhkOFRGOEhaYzhGTHd4SUVUdmZhSDFwWU5KekFLcTAzQWlOR0lJDQpwZzlPTGJpdDIrYkQ1WGJmTVhhaUNwY2xvSldkUVpFUVplR0UwMFpyMlExdFp6VXpVcER1SHA3S20xc3pPK3dUDQpBSkNIL2hxb2RJU1FZbnpSbWhEcnkwR2txL3phbFJ3RnJKM3INCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0NCg=="
+                            }
+                        }
+                    ],
+                    "vpnClientRevokedCertificates": [],
+                    "radiusServers": [],
+                    "vpnClientIpsecPolicies": []
+                },
+                "bgpSettings": {
+                    "asn": 65515,
+                    "bgpPeeringAddress": "22.0.1.254",
+                    "peerWeight": 0,
+                    "bgpPeeringAddresses": [
+                        {
+                            "ipconfigurationId": "[concat(resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_vnet_ghost_gw_name')), '/ipConfigurations/vnetGatewayConfig0')]",
+                            "customBgpIpAddresses": []
+                        }
+                    ]
+                },
+                "vpnGatewayGeneration": "Generation1"
+            }
+        }
+    ]
+}

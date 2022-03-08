@@ -118,27 +118,27 @@ New-SelfSignedCertificate -Type Custom -DnsName P2SChildCert -KeySpec Signature 
 ### Export the root certificate public key (.cer)
 After creating a self-signed root certificate, export the root certificate public key .cer file (not the private key). You will later upload this file to Azure. The following steps help you export the .cer file for your self-signed root certificate:
 
-Locate the self-signed root certificate, typically in `Certificates - Current User\Personal\Certificates`, and right-click. Click All Tasks, and then click **Export**. 
-
+Locate the self-signed root certificate, typically in `Certificates - Current User\Personal\Certificates`, and right-click. Click All Tasks, and then click **Export**.
+\
 ![export](Resources/export.png)
 Do not export the private key: \
 ![noprivatekey](Resources/notprivatekey.png)
 > NOTE: Only export the private key if you want to store and reuse the root certificate later on another computer to create more child certificates
 > 
-On the **Export File Format** page, select **Base-64 encoded X.509 (.CER).**, and then click **Next**.
+On the **Export File Format** page, select **Base-64 encoded X.509 (.CER).**, and then click **Next**.\
 ![base64](Resources/base64.png)
 
 ### Export the client certificate 
-To export a client certificate, open Manage user certificates. The client certificates that you generated are, by default, located in `Certificates - Current User\Personal\Certificates`. Right-click the client certificate that you want to export, click all tasks, and then click Export to open the Certificate Export Wizard.
+To export a client certificate, open Manage user certificates. The client certificates that you generated are, by default, located in `Certificates - Current User\Personal\Certificates`. Right-click the client certificate that you want to export, click all tasks, and then click Export to open the Certificate Export Wizard.\
 ![export-client](Resources/export-client.png)
 
-In this case export the private key as well
+In this case export the private key as well\
 ![exportwithprivatekey](Resources/privatekeyexport.png)
 
 On the **Export File Format** page, leave the defaults selected. Make sure that **Include all certificates in the certification path if possible** is selected. \
 ![exportallcertificates](Resources/includeallcerts.png)
 
-On the **Security** page, you must protect the private key. If you select to use a password, make sure to record or remember the password that you set for this certificate. Then, click **Next**.
+On the **Security** page, you must protect the private key. If you select to use a password, make sure to record or remember the password that you set for this certificate. Then, click **Next**.\
 ![security](Resources/security.png)
 
 ## Add the VPN client address pool

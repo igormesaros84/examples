@@ -1,7 +1,7 @@
 # Create a VM
 You can use the [template](Resources/Template/template.json) with the [parameters](Resources/Template/parameters.json) so to skip having to setup the vm manually, or use the following screenshots:
 
-1. Create VM
+1. Create VM\
    ![create-vm1](Resources/create-vm-1.jpg)
    ![create-vm2](Resources/create-vm-2.jpg)
    - Select an image that has sql server installed on it already

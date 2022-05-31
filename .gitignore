@@ -1,0 +1,6 @@
+
+*.hcl
+
+*.exe
+
+*.tfstate

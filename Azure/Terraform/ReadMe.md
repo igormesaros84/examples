@@ -16,5 +16,5 @@ If you download Terraform for the Windows operating system:
 1. Find the install package, which is bundled as a zip file.
 2. Copy files from the zip to a local directory such as C:\terraform. It's the Terraform PATH, so make sure that the Terraform binary is available on the PATH.
 3. To set the PATH environment variable, run the command set PATH=%PATH%;C:\terraform, or point to wherever you've placed the Terraform executable.
-4. Open an administrator command window at C:\Terraform and run the command Terraform to verify the installation. You should view the terraform help output.  ![terraform-window-console](Resources/terraform-windows-cli-bba8d230.png)
+4. Open an administrator command window at C:\Terraform and run the command Terraform to verify the installation. You should view the terraform help output.<br/> ![terraform-window-console](Resources/terraform-windows-cli-bba8d230.png)
 

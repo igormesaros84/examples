@@ -98,11 +98,3 @@ wget https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/Co
 ```
 restart-service winrm
 ```
-
-
-
-
-
-
-
-

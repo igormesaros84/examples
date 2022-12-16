@@ -4,20 +4,25 @@ variable "monitor_rg" {
   default     = "rg-bhs-monitor-lt-uks-001"
 }
 
-variable "serv_vm" {
-  description = "The VM that should be monitored"
+variable "vm_rg" {
+  description = "Virtual machine resource group"
+  type = string
+  default = "rg-bhs-ag1-lt1-lt-uks-001"
+}
+variable "serv_vm_name" {
+  description = "The target serv machine name"
   type        = string
-  default     = "/subscriptions/9e3fdfd9-6c3d-43ed-a62e-867c8231532a/resourceGroups/rg-bhs-ag1-lt1-lt-uks-001/providers/Microsoft.Compute/virtualMachineScaleSets/vmss-ag1-lt1-serv-lt-uks-001/virtualMachines/0" 
+  default     = "vmss-ag1-lt1-serv-lt-uks-001" 
 }
 
-variable "spr_vm" {
-  description = "The VM that should be monitored"
+variable "spr_vm_name" {
+  description = "The target spr machine name"
   type        = string
-  default     = "/subscriptions/9e3fdfd9-6c3d-43ed-a62e-867c8231532a/resourceGroups/rg-bhs-ag1-lt1-lt-uks-001/providers/Microsoft.Compute/virtualMachineScaleSets/vmss-ag1-lt1-spr-lt-uks-001/virtualMachines/0" 
+  default     = "vmss-ag1-lt1-spr-lt-uks-001" 
 }
 
-variable "web_vm" {
-  description = "The VM that should be monitored"
+variable "web_vm_name" {
+  description = "The target web machine name"
   type        = string
-  default     = "/subscriptions/9e3fdfd9-6c3d-43ed-a62e-867c8231532a/resourceGroups/rg-bhs-ag1-lt1-lt-uks-001/providers/Microsoft.Compute/virtualMachineScaleSets/vmss-ag1-lt1-web-lt-uks-001/virtualMachines/0" 
+  default     = "vmss-ag1-lt1-web-lt-uks-001" 
 }

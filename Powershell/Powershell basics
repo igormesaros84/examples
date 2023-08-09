@@ -1,0 +1,20 @@
+
+# Basic commands
+`Get-Command`- Gets info about a certain command, such as which version is it available from
+`Get-Help` - Displays help about Powershell cmdlets
+`Get-Verb` - Gets all the available .Net Standard verbs
+`Get-Member` - Get information relating to an object
+
+# Command Types
+- `Cmdlet` - a precompiled command that you can only view in github as it is open sourced.
+- `Function` - functions are written in PS and you can view the source
+- `Script` - text file with a ps1 extension. Its basically a batch file
+- `Application` - any program or executable
+
+# Command Naming Conventions
+Follows the following pattern `Verb-Noun`
+
+The `Noun` is the singular version of the thing that he cmdlet is working with, if file.
+The `Verb` is one of the set .Net Standard Verbs such as *Get* of *Set*. You can get all of the verbs with the `Get-Verb` command.
+
+

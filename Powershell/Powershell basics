@@ -18,3 +18,11 @@ The `Noun` is the singular version of the thing that he cmdlet is working with, 
 The `Verb` is one of the set .Net Standard Verbs such as *Get* of *Set*. You can get all of the verbs with the `Get-Verb` command.
 
 
+# WinRM
+If cannot `Enable-WSManCredSSP` you can use [this ps script](https://github.com/igormesaros84/Enable-WSManCredSSP) to fix the problem 
+
+```pwsh
+$cred = Get-Credential
+$options = New-PSSessionOption -SkipCACheck
+Enter-PSSession -ComputerName machine-name.domain.com -Credential $cred -Authentication CredSSP -UseSSL -SessionOption $options
+```

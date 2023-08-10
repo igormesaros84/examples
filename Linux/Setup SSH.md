@@ -1,6 +1,6 @@
 # How to setup ssh keys
 
-1. Generate a key value pair using this command as described [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent):
+1. Generate a key value pair on the linux machine using this command as described [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent):
 ```
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
@@ -27,4 +27,5 @@ scp administrator@10.0.1.117:/home/administrator/.ssh/id_ed25519 C:\users\<usern
     nano authorized_keys
     ```
     - Paste the `id_ed25519.pub` contents into here
-5. Start up `OpenSSH Authentication Agent`
+5. Start up `OpenSSH Authentication Agent` on the Windows machine
+6. Run `ssh-add 'C:\Users\<username>\.ssh\id_ed25519'` on the windows Machine

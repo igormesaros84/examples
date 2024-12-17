@@ -4,3 +4,9 @@
 *.exe
 
 *.tfstate
+
+Azure/Terraform/VM Behind VPN gateway/.terraform/
+
+Azure/Terraform/VM Behind VPN gateway/.terraform.tfstate.lock.info
+
+*.backup

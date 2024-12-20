@@ -1,4 +1,28 @@
-[[_TOC_]]
+- [Docker Cheat Sheet](#docker-cheat-sheet)
+  - [Basic Docker File](#basic-docker-file)
+  - [Commands](#commands)
+    - [Command to build the image:](#command-to-build-the-image)
+    - [Pushing this to the docker container registry:](#pushing-this-to-the-docker-container-registry)
+    - [Building image supporting different architectures](#building-image-supporting-different-architectures)
+    - [Remove container locally](#remove-container-locally)
+    - [Run the container](#run-the-container)
+    - [List running containers](#list-running-containers)
+    - [Start / Stop container](#start--stop-container)
+    - [Delete container](#delete-container)
+    - [Attach terminal to the container](#attach-terminal-to-the-container)
+  - [Docker Swarm](#docker-swarm)
+    - [Create the swarm cluster](#create-the-swarm-cluster)
+      - [Initialize the swarm, the node where you run this will be the lead swarm manager.](#initialize-the-swarm-the-node-where-you-run-this-will-be-the-lead-swarm-manager)
+      - [Get the command that needs running to join all the other managers](#get-the-command-that-needs-running-to-join-all-the-other-managers)
+      - [Get command that joins the worker](#get-command-that-joins-the-worker)
+      - [List all the nodes](#list-all-the-nodes)
+      - [Stop business apps from being ran on manager nodes](#stop-business-apps-from-being-ran-on-manager-nodes)
+      - [Create service containers on the nodes](#create-service-containers-on-the-nodes)
+      - [List all the service containers](#list-all-the-service-containers)
+    - [Docker compose in Swarm (Stack)](#docker-compose-in-swarm-stack)
+      - [Compose file](#compose-file)
+      - [Deploy docker to the swarm](#deploy-docker-to-the-swarm)
+
 
 # Docker Cheat Sheet
 

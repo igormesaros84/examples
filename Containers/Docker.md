@@ -123,6 +123,8 @@ docker container run -it --name web alpine sh
 
 #### Initialize the swarm, the node where you run this will be the lead swarm manager.
 
+Run this on the VM that will be the lead manager
+
 ```powershell
 docker swarm init --advertise-addr 192.168.64.19
 ```
@@ -133,13 +135,13 @@ docker swarm init --advertise-addr 192.168.64.19
 ```powershell
 docker swarm join-token manager
 ```
-The resulting command needs to be ran on the other manager nodes
+The resulting command needs to be ran on the other manager nodes, ie separate vm's that will each be managers
 
 #### Get command that joins the worker
 ```powershell
 docker swarm join-token worker
 ```
-The resulting command needs to be ran on the worker nodes.
+The resulting command needs to be ran on the worker nodes. ie. VM's that will be the worker nodes.
 
 #### List all the nodes
 ```powershell

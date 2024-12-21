@@ -1,3 +1,18 @@
+- [Podman Cheat sheet](#podman-cheat-sheet)
+  - [Skopeo](#skopeo)
+    - [Install Skopeo](#install-skopeo)
+    - [Inspect online metadata](#inspect-online-metadata)
+      - [Download the desired version of ubuntu that we found above](#download-the-desired-version-of-ubuntu-that-we-found-above)
+  - [Podman commands](#podman-commands)
+    - [List containers](#list-containers)
+    - [Remove not running containers](#remove-not-running-containers)
+    - [Run container in the background](#run-container-in-the-background)
+    - [Monitoring containers](#monitoring-containers)
+    - [Run command on running container](#run-command-on-running-container)
+    - [Run container with env variable and port mapping](#run-container-with-env-variable-and-port-mapping)
+    - [Give access to volume files to the container (SELinux)](#give-access-to-volume-files-to-the-container-selinux)
+    - [Start container on startup](#start-container-on-startup)
+
 # Podman Cheat sheet
 
 ## Skopeo

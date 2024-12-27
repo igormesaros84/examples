@@ -4,6 +4,8 @@
     - [Inspect online metadata](#inspect-online-metadata)
       - [Download the desired version of ubuntu that we found above](#download-the-desired-version-of-ubuntu-that-we-found-above)
   - [Podman commands](#podman-commands)
+    - [Build Docker file](#build-docker-file)
+    - [Publish docker image to registry](#publish-docker-image-to-registry)
     - [List containers](#list-containers)
     - [Remove not running containers](#remove-not-running-containers)
     - [Run container in the background](#run-container-in-the-background)
@@ -12,6 +14,10 @@
     - [Run container with env variable and port mapping](#run-container-with-env-variable-and-port-mapping)
     - [Give access to volume files to the container (SELinux)](#give-access-to-volume-files-to-the-container-selinux)
     - [Start container on startup](#start-container-on-startup)
+    - [Pods](#pods)
+      - [Add containers to a pod](#add-containers-to-a-pod)
+    - [Kubernetes](#kubernetes)
+- [Notes to self](#notes-to-self)
 
 # Podman Cheat sheet
 
@@ -41,6 +47,35 @@ podman image pull docker.io/ubuntu:focal
 ```
 
 ## Podman commands
+
+### Build Docker file
+Building the image
+```shell
+podman build -t <image_name> .
+```
+Running the image
+```shell
+podman run --name <container_name> -p 8080:8080 <image_name>:<tag>
+```
+### Publish docker image to registry
+Login to registry
+```shell
+podman login docker.io
+```
+- `docker.io` - Docker io container registry
+
+Build the container image in the folder same as above
+```shell
+podman build -t guisecara/pdm-golang
+```
+- `guisecara` - username
+- `pdm-golang` - container image name
+
+Push the container image to the registry
+```shell
+podman push guisecara/pdm-golang
+```
+
 
 ### List containers
 ```shell
@@ -150,4 +185,59 @@ systemctl daemon-reload
 Start up the service through system ctl
 ```shell
 systemctl enable --now www
+```
+
+### Pods
+A pod is a group of one or more containers sharing the same network, pid and ipc namespace.
+
+```shell
+podman pod --help
+podman pod create --name <pod_name>
+podman pod start
+podman pod stop
+podman pod rm <pod_name>
+```
+- `create` - when you create an empty pod, podman automatically ads an *infra* container. This servers holding the namespaces associated with the pod. This enables you to start and stop containers while keeping the pod running.
+
+List all created pods
+```shell
+podman pod ls
+```
+
+List all the containers in the pod
+```shell
+podman ps -a --pod
+```
+
+#### Add containers to a pod
+Run new container image inside a pod
+```shell
+podman run -dt --pod <name of the pod> <container image name>
+```
+
+### Kubernetes
+Generate kubernetes manifest.yaml from existing pod
+```shell
+podman generate kube <name_of_existing_pod>
+```
+
+Create kubernetes from a manifest file
+```shell
+podman play kube <yaml-file-name>
+```
+
+# Notes to self
+Check if the podman wsl is running
+```powershell
+ wsl -l -v
+ ```
+|NAME|STATE|VERSION|
+|---|-|-|
+|* podman-machine-default|Running|2|
+|Ubuntu|Stopped|2|
+
+
+If the `podman-machine-default` is not running then run this command:
+```powershell
+podman machine start 
 ```

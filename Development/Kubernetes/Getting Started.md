@@ -1,4 +1,21 @@
-# Kubernetes architecture
+- [Kubernetes cheat sheet](#kubernetes-cheat-sheet)
+  - [Kubernetes architecture](#kubernetes-architecture)
+  - [Control Node](#control-node)
+    - [Api Server](#api-server)
+    - [Cluster store](#cluster-store)
+    - [Controller manager](#controller-manager)
+    - [Scheduler](#scheduler)
+  - [Worker Node](#worker-node)
+    - [Kubelet](#kubelet)
+    - [Container runtime](#container-runtime)
+    - [Kube-Proxy](#kube-proxy)
+  - [Pods](#pods)
+    - [Networking and services](#networking-and-services)
+- [Note to self](#note-to-self)
+
+# Kubernetes cheat sheet
+
+## Kubernetes architecture
 
 ![Architecture](./Resources/architecture.png)
 
@@ -74,3 +91,12 @@ Services:
 - Can be used to do session affinity
 - Can send traffic outside of the cluster
 - Can do TCP and UDP
+
+# Note to self
+
+To run kubectl locally [minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download) needs to be running:
+
+```powershell
+minikube start
+```
+

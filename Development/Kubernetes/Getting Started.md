@@ -11,6 +11,7 @@
     - [Kube-Proxy](#kube-proxy)
   - [Pods](#pods)
     - [Networking and services](#networking-and-services)
+- [Useful commands](#useful-commands)
 - [Note to self](#note-to-self)
 
 # Kubernetes cheat sheet
@@ -92,6 +93,18 @@ Services:
 - Can send traffic outside of the cluster
 - Can do TCP and UDP
 
+# Useful commands
+Get all running pods
+```powershell
+kubectl get pods --watch
+```
+
+Get details of a pod
+```powershell
+kubectl describe pod hello-pod
+```
+- `hello-pod` - name of the pod
+
 # Note to self
 
 To run kubectl locally [minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download) needs to be running:
@@ -99,4 +112,3 @@ To run kubectl locally [minikube](https://minikube.sigs.k8s.io/docs/start/?arch=
 ```powershell
 minikube start
 ```
-
